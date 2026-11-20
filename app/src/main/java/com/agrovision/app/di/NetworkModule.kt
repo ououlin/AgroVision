@@ -193,4 +193,12 @@ object NetworkModule {
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
+        // readTimeout 只约束单次 socket 读；服务端"慢速滴流"时连接可以挂很久，
+        // callTimeout 给整次调用兜底，避免同步任务（WorkManager）被一条请求拖死。
+        .callTimeout(120, TimeUnit.SECONDS)
+        // 网关抖动时的连接级重试；只重试可安全重放的连接失败，不重放已发出的写请求
+        .retryOnConnectionFailure(true)
+        // 出站地址固定为 HTTPS（debug 走 10.0.2.2 明文已由 network_security_config 白名单限定），
+        // 禁止隐式跟随 3xx 到其他协议，防止 Bearer Token 被带到非预期主机
+        .followSslRedirects(false)
 }
