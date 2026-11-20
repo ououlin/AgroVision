@@ -153,6 +153,33 @@ KEY_PASSWORD=****
 
 > 版本号说明：对外版本叙事以 `app/build.gradle.kts` 的 `versionName` 为准。V3.0 相关代码因历史命名保留在仓库中，但其功能未闭环，不构成对外承诺。
 
+## 模型权重下载
+
+训练权重与训练侧导出模型合计约 12 MB、且不属于源码，因此不进入 Git 历史，随 [Release v2.0.0](https://github.com/ououlin/AgroVision/releases/tag/v2.0.0) 分发：
+
+| 文件 | 说明 | 大小 | SHA-256 |
+|------|------|------|---------|
+| `agrovision_cls_best.pt` | PyTorch 训练权重（MobileNetV3-Small，PlantVillage color 38 类） | 5.95 MB | `92D4D52F46C95F328ADC47AFE55F22081F03CB4E3247789EA1EE73F430990F68` |
+| `agrovision_cls_yolo11n.onnx` | 训练侧导出的 ONNX，用于复现与结果校验（文件名沿用历史命名，实际为分类模型） | 5.84 MB | `97CF0B38DC444C25519AE26F0FF2CCC49047ABC9050A610DEAEDF60DC6D2012E` |
+
+app 运行所需模型不在此列：`app/src/main/assets/model/yolo11n.onnx`（6.0 MB，输出维度 `[1,38]`）已随源码提交，克隆后即可直接构建，无需额外下载。
+
+## 仓库内容说明
+
+为控制仓库体积，下列内容保留在本地、不进入 Git：
+
+| 未入库内容 | 说明 |
+|---|---|
+| `app/build/`、`build/`、`.gradle/` | Gradle 构建产物与缓存，`./gradlew assembleDebug` 可重建 |
+| `local.properties` | 本机 Android SDK 路径，按 `sdk.dir=D:\...\Sdk` 自行创建 |
+| `app-*.apk` | 安装包（Debug/Release），由构建生成，不入库 |
+| `tools/agrovision_cls/` | 训练权重与导出模型，见上方 Release |
+| `competition/02_data/plantvillage_color_split_manifest.csv` | 16 MB 数据集切分清单，可由 `tools/split_imagefolder_dataset.py` 重新生成 |
+| `competition/00_official/*.pdf`、`competition/01_project/*盲审版*.docx/pdf` | 比赛官方通知与提交件；对应的 Markdown 源稿已在库内 |
+| `SHA256SUMS.txt` | 提交校验用的临时清单，随文件集变化失效 |
+
+因此 `docs/` 与 `competition/` 中指向上述文件的引用在本仓库内无法直接打开，属预期行为。
+
 ## License
 
 本项目采用 [MIT 许可证](LICENSE)。Copyright (c) 2026 ououlin。
