@@ -10,6 +10,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -249,7 +250,7 @@ private fun EntryCards(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        EntryCard(Modifier.weight(1f), Icons.Filled.MenuBook, "病虫百科", "$pestCount 种", Success50, onEncyclopedia)
+        EntryCard(Modifier.weight(1f), Icons.AutoMirrored.Filled.MenuBook, "病虫百科", "$pestCount 种", Success50, onEncyclopedia)
         EntryCard(Modifier.weight(1f), Icons.Filled.History, "历史记录", "$historyCount 条", Orange50, onHistory)
     }
 }

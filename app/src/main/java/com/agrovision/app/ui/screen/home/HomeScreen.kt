@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.platform.LocalContext
 import com.agrovision.app.R
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -390,7 +391,7 @@ private fun QuickGrid(
         }
         Spacer(Modifier.height(Spacing.MD.dp))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(Spacing.MD.dp)) {
-            QuickCard(Modifier.weight(1f), Icons.Filled.MenuBook, "病虫百科", "农业知识库", brandGreen(), onEncyclopedia)
+            QuickCard(Modifier.weight(1f), Icons.AutoMirrored.Filled.MenuBook, "病虫百科", "农业知识库", brandGreen(), onEncyclopedia)
             QuickCard(Modifier.weight(1f), Icons.Filled.Psychology, "问农技", "农业问题和日常交流", accentOrange(), onDiagnosis)
         }
     }

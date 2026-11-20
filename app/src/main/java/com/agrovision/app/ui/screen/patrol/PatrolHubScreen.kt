@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -131,7 +132,7 @@ private fun QuickEntryGrid(
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             EntryItem(Modifier.weight(1f), Icons.Filled.Dashboard, "监控", Blue50, onMonitor)
             EntryItem(Modifier.weight(1f), Icons.Filled.History, "历史", Color(0xFF795548), onHistory)
-            EntryItem(Modifier.weight(1f), Icons.Filled.MenuBook, "百科", Green40, onEncyclopedia)
+            EntryItem(Modifier.weight(1f), Icons.AutoMirrored.Filled.MenuBook, "百科", Green40, onEncyclopedia)
         }
     }
 }

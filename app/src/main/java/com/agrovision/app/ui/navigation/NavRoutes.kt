@@ -1,6 +1,7 @@
 package com.agrovision.app.ui.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -22,7 +23,7 @@ sealed class NavRoutes(
 
     // 子页面
     data object PestDetail : NavRoutes("pest_detail?pestName={pestName}", "病虫详情",
-        Icons.Filled.MenuBook, Icons.Outlined.MenuBook, false) {
+        Icons.AutoMirrored.Filled.MenuBook, Icons.Outlined.MenuBook, false) {
         fun createRoute(n: String) = "pest_detail?pestName=${android.net.Uri.encode(n)}"
     }
     data object Diagnosis : NavRoutes("diagnosis?diseaseName={diseaseName}&confidence={confidence}&imagePath={imagePath}", "AI诊断",
@@ -33,7 +34,7 @@ sealed class NavRoutes(
         }
     }
     data object Encyclopedia : NavRoutes("encyclopedia", "病虫百科",
-        Icons.Filled.MenuBook, Icons.Outlined.MenuBook, false)
+        Icons.AutoMirrored.Filled.MenuBook, Icons.Outlined.MenuBook, false)
     data object History : NavRoutes("history", "历史记录",
         Icons.Filled.History, Icons.Outlined.History, false)
     data object HistoryDetail : NavRoutes("history_detail/{historyId}", "历史详情",
@@ -74,7 +75,7 @@ sealed class NavRoutes(
     // V3.0 设置中心子页
     data object ApiManager : NavRoutes("api_manager", "API管理", Icons.Filled.Api, Icons.Outlined.Api, false)
     data object DevCenter : NavRoutes("dev_center", "开发者中心", Icons.Filled.Terminal, Icons.Outlined.Terminal, false)
-    data object Manual : NavRoutes("manual", "用户使用手册", Icons.Filled.MenuBook, Icons.Outlined.MenuBook, false)
+    data object Manual : NavRoutes("manual", "用户使用手册", Icons.AutoMirrored.Filled.MenuBook, Icons.Outlined.MenuBook, false)
 
     // V2.0 路由
     /** 农技搜索（独立入口，RAG only 不调 LLM） */

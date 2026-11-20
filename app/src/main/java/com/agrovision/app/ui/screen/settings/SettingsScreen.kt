@@ -7,6 +7,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -153,7 +154,7 @@ fun SettingsScreen(
                     ProfileRow(Icons.Filled.AccountCircle, "昵称", settings.nickname) {
                         viewModel.updateNickname(it)
                     }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     Row(
                         Modifier.fillMaxWidth().clickable { showBindPhoneDialog = true }
                             .padding(horizontal = 16.dp, vertical = 10.dp),
@@ -171,20 +172,20 @@ fun SettingsScreen(
                         Icon(Icons.Filled.Edit, null, Modifier.size(16.dp),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f))
                     }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     EditRow(Icons.Filled.Email, "邮箱", settings.email.ifEmpty { "未设置" }) {
                         viewModel.updateEmail(it)
                     }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     InfoRow(Icons.Filled.VerifiedUser, "账号类型", "已登录用户")
                 }
 
                 Spacer(Modifier.height(8.dp))
                 SettingsCard {
-                    ClickRow(Icons.Filled.Logout, "退出登录", "清除凭据并切换到登录页") {
+                    ClickRow(Icons.AutoMirrored.Filled.Logout, "退出登录", "清除凭据并切换到登录页") {
                         showLogoutDialog = true
                     }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     val dangerRed = brandRed()
                     ClickRow(Icons.Filled.Delete, "注销账号", "清空全部数据并永久删除账号",
                         iconTint = dangerRed, valueColor = dangerRed) {
@@ -197,7 +198,7 @@ fun SettingsScreen(
                     ProfileRow(Icons.Filled.AccountCircle, "昵称", settings.nickname) {
                         viewModel.updateNickname(it)
                     }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     InfoRow(Icons.Filled.PhoneAndroid, "运行模式", "本地模式")
                 }
             }
@@ -211,15 +212,15 @@ fun SettingsScreen(
                     listOf("deepseek" to "DeepSeek", "qwen" to "Qwen 通义千问", "openai" to "OpenAI", "gemini" to "Gemini", "ollama" to "Ollama 本地", "custom" to "自定义 API")
                 ) { viewModel.updateAiProvider(it) }
 
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
 
                 // API Key 安全输入
                 PasswordRow(Icons.Filled.Key, "API Key", settings.apiKey) { viewModel.updateApiKey(it) }
 
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 EditRow(Icons.Filled.Link, "Base URL", settings.baseUrl) { viewModel.updateBaseUrl(it) }
 
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 DropdownRow(Icons.Filled.ModelTraining, "AI 模型", settings.aiModel,
                     listOf(
                         "deepseek-chat" to "DeepSeek-V3",
@@ -233,24 +234,24 @@ fun SettingsScreen(
                     )
                 ) { viewModel.updateAiModel(it) }
 
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 SliderRow("Temperature", settings.temperature, 0f, 2f) { viewModel.updateTemperature(it) }
 
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 SliderRow("Top P", settings.topP, 0f, 1f) { viewModel.updateTopP(it) }
 
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 DropdownRow(Icons.Filled.TextFields, "Max Tokens", settings.maxTokens.toString(),
                     listOf("512" to "512", "1024" to "1024", "2048" to "2048", "4096" to "4096", "8192" to "8192", "16384" to "16384", "32768" to "32768")
                 ) { viewModel.updateMaxTokens(it.toIntOrNull() ?: 4096) }
 
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 DropdownRow(Icons.Filled.Storage, "Context Length", settings.contextLength.toString(),
                     listOf("4096" to "4096", "8192" to "8192", "16384" to "16384", "32768" to "32768")
                 ) { viewModel.updateContextLength(it.toIntOrNull() ?: 8192) }
 
-                Divider(Modifier.padding(horizontal = 16.dp))
-                SwitchRow(Icons.Filled.MenuBook, "启用 RAG 知识库", settings.enableRag) { viewModel.updateRag(it) }
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
+                SwitchRow(Icons.AutoMirrored.Filled.MenuBook, "启用 RAG 知识库", settings.enableRag) { viewModel.updateRag(it) }
             }
 
             // 跳转 API 管理页
@@ -269,7 +270,7 @@ fun SettingsScreen(
             SettingsCard {
                 EditRow(Icons.Filled.Cloud, "和风天气 API Key", settings.weatherApiKey,
                     hint = "留空则使用免费天气服务") { viewModel.updateWeatherApiKey(it) }
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 val weatherSource = if (settings.weatherApiKey.isNotBlank()) "和风天气（已配置Key）" else "wttr.in（免费兜底）"
                 InfoRow(Icons.Filled.Info, "当前天气源", weatherSource)
             }
@@ -280,11 +281,11 @@ fun SettingsScreen(
             SectionHeader("识别模型信息")
             SettingsCard {
                 InfoRow(Icons.Filled.Visibility, "模型架构", "MobileNetV3-Small")
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 InfoRow(Icons.Filled.Memory, "推理引擎", "ONNX Runtime 1.17")
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 InfoRow(Icons.Filled.AspectRatio, "输入尺寸", "224 × 224")
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 InfoRow(Icons.Filled.Speed, "推理方式", "CPU")
             }
 
@@ -295,11 +296,11 @@ fun SettingsScreen(
                 SectionHeader("服务器配置")
                 SettingsCard {
                     SwitchRow(Icons.Filled.Cloud, "启用服务器", settings.serverEnabled) { viewModel.updateServerEnabled(it) }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     EditRow(Icons.Filled.Dns, "API 服务器地址", settings.serverBaseUrl, hint = "http://192.168.1.10:8000") {
                         viewModel.updateServerUrl(it)
                     }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
 
                     // 测试连接按钮
                     Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp),
@@ -345,11 +346,11 @@ fun SettingsScreen(
                 SectionHeader("机器人设置（V3.0）")
                 SettingsCard {
                     EditRow(Icons.Filled.Router, "ROS IP", settings.rosIp, hint = "192.168.1.200") { viewModel.updateRosIp(it) }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     EditRow(Icons.Filled.SettingsEthernet, "ROS Port", settings.rosPort, hint = "9090") { viewModel.updateRosPort(it) }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     EditRow(Icons.Filled.Cable, "MQTT Broker", settings.mqttBroker, hint = "tcp://192.168.1.100:1883") { viewModel.updateMqttBroker(it) }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     DropdownRow(Icons.Filled.PrecisionManufacturing, "机器人型号", settings.robotName,
                         listOf("go2" to "Go2-W 四足", "ros_car" to "ROS2 小车", "leju" to "乐聚机器人")
                     ) { viewModel.updateRobotName(it) }
@@ -365,7 +366,7 @@ fun SettingsScreen(
                     val accentOrange = accentOrange()
                     val dangerRed = brandRed()
                     SwitchRow(Icons.Filled.GpsFixed, "记录GPS轨迹", settings.gpsRecordTrack, iconTint = accentOrange) { viewModel.updateGpsTrack(it) }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     SwitchRow(Icons.Filled.Whatshot, "病害热力图", settings.heatmapEnabled, iconTint = dangerRed) { viewModel.updateHeatmap(it) }
                 }
             }
@@ -377,13 +378,13 @@ fun SettingsScreen(
                 SectionHeader("数据同步")
                 SettingsCard {
                     SwitchRow(Icons.Filled.Sync, "自动同步", settings.autoSync) { viewModel.updateAutoSync(it) }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     SwitchRow(Icons.Filled.Wifi, "仅在 WiFi 下同步", settings.syncWifiOnly) { viewModel.updateSyncWifiOnly(it) }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     SwitchRow(Icons.Filled.SignalCellularAlt, "移动网络同步", settings.syncMobileNetwork) { viewModel.updateSyncMobile(it) }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     SwitchRow(Icons.Filled.CloudUpload, "上传图片", settings.syncUploadImages) { viewModel.updateUploadImages(it) }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     SwitchRow(Icons.Filled.Download, "下载模型", settings.syncDownloadModel) { viewModel.updateDownloadModel(it) }
                 }
             }
@@ -405,9 +406,9 @@ fun SettingsScreen(
                         },
                         name, size
                     )
-                    if (name != cacheSizes.keys.last()) Divider(Modifier.padding(horizontal = 16.dp))
+                    if (name != cacheSizes.keys.last()) HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 }
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
 
                 Row(Modifier.fillMaxWidth().padding(16.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -450,7 +451,7 @@ fun SettingsScreen(
                         }
                     }
                 }
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 val brandBlue = brandBlue()
                 ClickRow(Icons.Filled.Download, "导入数据", "从备份文件恢复数据", iconTint = brandBlue) {
                     filePickerLauncher.launch("application/json")
@@ -458,7 +459,7 @@ fun SettingsScreen(
 
                 when (val status = backupStatus) {
                     is BackupStatus.Exporting -> {
-                        Divider(Modifier.padding(horizontal = 16.dp))
+                        HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                             CircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp)
                             Spacer(Modifier.width(8.dp))
@@ -466,11 +467,11 @@ fun SettingsScreen(
                         }
                     }
                     is BackupStatus.ExportSuccess -> {
-                        Divider(Modifier.padding(horizontal = 16.dp))
+                        HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                         InfoRow(Icons.Filled.CheckCircle, "导出成功", "请选择保存位置")
                     }
                     is BackupStatus.Importing -> {
-                        Divider(Modifier.padding(horizontal = 16.dp))
+                        HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                             CircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp)
                             Spacer(Modifier.width(8.dp))
@@ -478,7 +479,7 @@ fun SettingsScreen(
                         }
                     }
                     is BackupStatus.ImportSuccess -> {
-                        Divider(Modifier.padding(horizontal = 16.dp))
+                        HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                         InfoRow(
                             Icons.Filled.CheckCircle,
                             "导入成功",
@@ -486,7 +487,7 @@ fun SettingsScreen(
                         )
                     }
                     is BackupStatus.Failed -> {
-                        Divider(Modifier.padding(horizontal = 16.dp))
+                        HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                         InfoRow(Icons.Filled.Error, "操作失败", status.message)
                     }
                     null -> {}
@@ -501,15 +502,15 @@ fun SettingsScreen(
                 DropdownRow(Icons.Filled.DarkMode, "主题模式", settings.themeMode,
                     listOf("light" to "浅色", "dark" to "深色", "system" to "跟随系统")
                 ) { viewModel.updateThemeMode(it) }
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 SwitchRow(Icons.Filled.Palette, "Material You 动态颜色", settings.materialYou) { viewModel.updateMaterialYou(it) }
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 DropdownRow(Icons.Filled.FormatSize, "字体大小", settings.fontSize,
                     listOf("small" to "小", "normal" to "标准", "large" to "大")
                 ) { viewModel.updateFontSize(it) }
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 SwitchRow(Icons.Filled.Animation, "页面动画", settings.animationsEnabled) { viewModel.updateAnimations(it) }
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 DropdownRow(Icons.Filled.Language, "语言", settings.language,
                     listOf("zh" to "简体中文", "en" to "English")
                 ) { viewModel.updateLanguage(it) }
@@ -523,11 +524,11 @@ fun SettingsScreen(
                 SettingsCard {
                     SwitchRow(Icons.Filled.Terminal, "开发者模式", settings.devMode) { viewModel.updateDevMode(it) }
                     if (settings.devMode) {
-                        Divider(Modifier.padding(horizontal = 16.dp))
+                        HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                         SwitchRow(Icons.Filled.Speed, "显示 FPS", settings.showFps) { viewModel.updateDevShowFps(it) }
-                        Divider(Modifier.padding(horizontal = 16.dp))
+                        HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                         SwitchRow(Icons.Filled.Memory, "显示 GPU 状态", settings.showGpuStatus) { viewModel.updateDevShowGpu(it) }
-                        Divider(Modifier.padding(horizontal = 16.dp))
+                        HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                         ClickRow(Icons.Filled.Build, "开发者中心", "调试工具 · 日志 · API测试") {
                             onNavigateToDevCenter()
                         }
@@ -540,12 +541,12 @@ fun SettingsScreen(
             // ========================================
             SectionHeader("关于")
             SettingsCard {
-                ClickRow(Icons.Filled.MenuBook, "用户使用手册", "功能说明 · 操作指南") { onNavigateToManual() }
-                Divider(Modifier.padding(horizontal = 16.dp))
+                ClickRow(Icons.AutoMirrored.Filled.MenuBook, "用户使用手册", "功能说明 · 操作指南") { onNavigateToManual() }
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 ClickRow(Icons.Filled.Info, "关于 AgroVision", "许可证 · 团队") { onNavigateToAbout() }
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 InfoRow(Icons.Filled.Smartphone, "版本号", BuildConfig.VERSION_NAME)
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                 InfoRow(Icons.Filled.BuildCircle, "Build", "2026.07.04-debug")
             }
 

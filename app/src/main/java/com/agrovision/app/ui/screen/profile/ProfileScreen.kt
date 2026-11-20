@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -67,7 +68,7 @@ fun ProfileScreen(
             Card(shape = RoundedCornerShape(16.dp), elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)) {
                 MenuRow(Icons.Filled.History, "历史记录", "查看所有检测记录", onNavigateToHistory)
                 Div(Modifier.padding(horizontal = 56.dp))
-                MenuRow(Icons.Filled.MenuBook, "病虫百科", "病虫害知识库", onNavigateToEncyclopedia)
+                MenuRow(Icons.AutoMirrored.Filled.MenuBook, "病虫百科", "病虫害知识库", onNavigateToEncyclopedia)
                 Div(Modifier.padding(horizontal = 56.dp))
                 MenuRow(Icons.Filled.Settings, "设置", "深色模式、模型、API Key", onNavigateToSettings)
                 Div(Modifier.padding(horizontal = 56.dp))

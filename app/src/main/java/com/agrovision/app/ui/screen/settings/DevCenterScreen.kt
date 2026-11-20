@@ -142,15 +142,15 @@ fun DevCenterScreen(
             ) {
                 Column {
                     InfoRowInline("识别历史", "${dbStats.historyCount} 条")
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     InfoRowInline("用户反馈", "${dbStats.feedbackCount} 条")
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     val accText = if (dbStats.feedbackAccuracy < 0) "暂无数据"
                     else "%.1f%%".format(dbStats.feedbackAccuracy * 100)
                     InfoRowInline("识别准确率", accText)
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     DevAction("刷新统计", Icons.Filled.Refresh) { viewModel.refreshDbStats() }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     DevAction("查看数据库详情", Icons.Filled.Storage) { showDbSheet = true }
                 }
             }
@@ -168,7 +168,7 @@ fun DevCenterScreen(
                         viewModel.refreshModelInfo()
                         showModelSheet = true
                     }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     DevAction("导出诊断日志", Icons.Filled.SaveAlt) {
                         scope.launch {
                             viewModel.exportDiagnosticReport()?.let { file ->
@@ -184,7 +184,7 @@ fun DevCenterScreen(
                             }
                         }
                     }
-                    Divider(Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
                     Row(
                         Modifier.fillMaxWidth().clickable { viewModel.toggleMockMode() }
                             .padding(horizontal = 16.dp, vertical = 12.dp),
@@ -244,7 +244,7 @@ fun DevCenterScreen(
                         Text(m.sizeText, style = MaterialTheme.typography.labelSmall,
                             color = if (m.exists) Green50 else Red50)
                     }
-                    Divider(Modifier.padding(vertical = 2.dp))
+                    HorizontalDivider(Modifier.padding(vertical = 2.dp))
                 }
                 Spacer(Modifier.height(16.dp))
             }
@@ -288,7 +288,7 @@ private fun InfoCard(items: List<Pair<String, String>>) {
                     Text(k, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(v, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Medium)
                 }
-                if (i < items.lastIndex) Divider(Modifier.padding(horizontal = 16.dp))
+                if (i < items.lastIndex) HorizontalDivider(Modifier.padding(horizontal = 16.dp))
             }
         }
     }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -147,7 +148,7 @@ fun ManualScreen(onNavigateBack: () -> Unit) {
             Spacer(Modifier.height(Spacing.XL.dp))
 
             // 4. 病虫百科
-            ManualGroup(title = "4. 病虫百科", icon = Icons.Filled.MenuBook) {
+            ManualGroup(title = "4. 病虫百科", icon = Icons.AutoMirrored.Filled.MenuBook) {
                 ManualStep("当前离线模型范围") {
                     "当前随包模型为 8 类试验模型，覆盖苹果、蓝莓、樱桃健康/病害及无叶背景。百科中可检索更多作物知识，但不代表模型能够识别这些类别。\n" +
                         "首页 → 「病虫百科」卡片 或 我的 → 病虫百科 可进入。"

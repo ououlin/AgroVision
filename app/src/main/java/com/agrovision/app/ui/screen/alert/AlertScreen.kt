@@ -83,7 +83,7 @@ fun AlertScreen(
                 }
             }
 
-            Divider()
+            HorizontalDivider()
 
             if (filtered.isEmpty()) {
                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
