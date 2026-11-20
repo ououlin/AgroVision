@@ -12,6 +12,7 @@
 [![onnx](https://img.shields.io/badge/ONNX%20Runtime-1.17.1-005ced?style=flat-square&logo=onnx&logoColor=white)](#模型与数据)
 [![top1](https://img.shields.io/badge/Top--1-99.18%25-2ea44f?style=flat-square)](#模型与数据)
 [![offline](https://img.shields.io/badge/Offline--first-8957e5?style=flat-square)](#架构)
+[![ci](https://github.com/ououlin/AgroVision/actions/workflows/android.yml/badge.svg)](https://github.com/ououlin/AgroVision/actions/workflows/android.yml)
 
 <sub>145 个 Kotlin 文件 / 23,484 行　·　21 个屏幕分包　·　41 个单元测试　·　文档更新 2026-11-20</sub>
 
@@ -168,11 +169,14 @@ AgroVision/
 │   └── wrapper/                     # Gradle Wrapper 8.9
 ├── tools/                           # 训练 / 导出 / 数据准备（Python + PowerShell）
 ├── backend/supabase/                # 表结构、RLS 策略与 RPC（生产后端未上线）
+├── .github/workflows/               # CI：单测 + assembleDebug + schema 快照校验
 ├── .gitignore / .gitattributes      # 入库过滤规则与行尾策略
 └── LICENSE
 ```
 
 > `docs/`（项目说明书、用户手册、训练指南、数据台账）为交付材料，本地保留，不入库。
+>
+> `app/schemas/` 是 KSP 导出的 Room schema 快照，与 `AppDatabase.version` 一起入库；迁移改动以它为准，CI 会校验它是否与实体定义漂移。
 
 包规模：`ui` 57 · `data` 48 · `domain` 12 · `di` 6 · `ml` 5 · `network` 2 · `util` 2 · `config` 1 · 根级 2（Kotlin 文件数）。
 
@@ -198,6 +202,28 @@ AgroVision/
 sdk.dir=D:\...\Android\Sdk
 ```
 
+### 持续集成
+
+`.github/workflows/android.yml` 在每次 push / PR 上执行，同分支并发会互相取消：
+
+| 步骤 | 命令 | 作用 |
+|:--|:--|:--|
+| 单元测试 | `./gradlew :app:testDebugUnitTest` | 41 个 JVM 用例 |
+| 构建 | `./gradlew :app:assembleDebug` | 产出可安装 APK，artifact 保留 14 天 |
+| schema 校验 | `git diff --exit-code app/schemas` | 改了表结构却没提 schema 快照时直接失败 |
+
+### 工具脚本的数据路径
+
+`tools/` 下的脚本不再硬编码本机路径，按仓库相对位置 + 环境变量解析：
+
+| 环境变量 | 默认值 | 用途 |
+|:--|:--|:--|
+| `AGROVISION_DATASET` | `~/agrovision_dataset` | 训练 / 导出用的 ImageFolder 数据集 |
+| `AGROVISION_ARCHIVE` | `~/plantvillage/archive.zip` | PlantVillage 原始压缩包 |
+| `AGROVISION_COLOR_OUT` | `~/plantvillage/color_archive` | 解压后的 color 变体目录 |
+
+模型转换脚本（`convert_*.py` / `export_onnx11.py`）的 `os.chdir` 目标也改为按脚本位置反推 `app/src/main/assets/model`。
+
 ### Release 签名（上架前必做）
 
 未配置正式 jks 时，`assembleRelease` 会回落到 debug 签名，**产物不可上架**，仅用于本地混淆/崩溃自查。构建脚本会主动拦截"用 debug 密钥打发布包"：未提供四项配置时 `packageRelease` / `signReleaseBundle` 直接失败。
@@ -212,7 +238,7 @@ KEY_PASSWORD=****
 
 ## 质量与验证
 
-41 个 JVM 用例分布在 9 个测试类，集中在**可被纯逻辑验证**的部分（算法、映射、策略、计算），不依赖真机与网络。
+41 个 JVM 用例分布在 9 个测试类，集中在**可被纯逻辑验证**的部分（算法、映射、策略、计算），不依赖真机与网络。CI 在每次 push / PR 上跑这套用例 + `assembleDebug`，并校验 Room schema 快照未漂移。
 
 | 测试类 | 用例 | 覆盖点 |
 |:--|:--:|:--|
