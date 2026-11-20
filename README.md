@@ -170,6 +170,7 @@ AgroVision/
 ├── tools/                           # 训练 / 导出 / 数据准备（Python + PowerShell）
 ├── backend/supabase/                # 表结构、RLS 策略与 RPC（生产后端未上线）
 ├── .github/workflows/               # CI：单测 + assembleDebug + schema 快照校验
+├── CHANGELOG.md                     # 版本变更记录（按日期倒序）
 ├── .gitignore / .gitattributes      # 入库过滤规则与行尾策略
 └── LICENSE
 ```
@@ -323,6 +324,7 @@ KEY_PASSWORD=****
 | 训练 / 导出 / 数据准备脚本 | `tools/` |
 | 随包模型、标签与元数据 | `app/src/main/assets/model/` |
 | 表结构、RLS 策略与 RPC | `backend/supabase/` |
+| 版本变更记录（按日期倒序） | [`CHANGELOG.md`](CHANGELOG.md) |
 
 ## 许可证
 

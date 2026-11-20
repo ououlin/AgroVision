@@ -65,7 +65,7 @@ foreach ($file in @(
     'gradlew.bat',
     'settings.gradle.kts',
     'README.md',
-    'V2.0.md'
+    'CHANGELOG.md'
 )) {
     $source = Join-Path $repo $file
     if (Test-Path $source) {
