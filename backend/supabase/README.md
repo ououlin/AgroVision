@@ -40,9 +40,8 @@
 - 验证：Tables 应出现 `user_profiles` / `plots` / `detection_history` / `treatments`
 
 ### 4. 创建 Storage Bucket
-- Dashboard → Storage → New Bucket
-- 名称：`thumbnails`，Public: false（用签名 URL 访问）
-- 配置 RLS：仅允许用户写入 `thumbnails/{user_id}/` 前缀
+- **`schema.sql` 已自动建好 `thumbnails` bucket（private，256 KB 上限）与三条 `storage.objects` 策略**（用户只能读写 `thumbnails/{user_id}/` 前缀）
+- 若当前角色无 `storage` schema 写权限导致该段失败，再到 Dashboard → Storage → New Bucket 手动创建，名称 `thumbnails`、Public 关闭
 
 ### 5. 客户端配置（Android 端）
 在 `app/build.gradle.kts` 中：
@@ -96,10 +95,13 @@ buildConfigField("String", "SUPABASE_ANON_KEY", "\"xxx\"")
 
 ## 五、安全策略
 
-1. **RLS 全表开启**：用户只能 CRUD 自己的行（`auth.uid() = user_id`）
+1. **RLS 全表开启 + FORCE**：用户只能 CRUD 自己的行（`auth.uid() = user_id`）；`force row level security` 让表属主同样受策略约束，只有 `service_role`（BYPASSRLS）能绕过
 2. **API Key 不下沉到客户端**：`service_role key` 仅用于 Edge Function / 后端脚本；客户端只用 `anon key`
-3. **缩略图签名 URL**：Storage 用 `createSignedUrl()` 返回 1 小时有效的下载链接
-4. **不存原图**：客户端压缩后上传缩略图，原图留在本地存储
+3. **RPC 一律 security invoker**：`upsert_plots` 以内调用者身份执行，RLS 照常生效——即便函数内断言被绕过，也写不进别人名下的行；同时 `set search_path = public, pg_temp` 关闭搜索路径劫持
+4. **anon 无表权限**：四张表已 `revoke all ... from anon`，`authenticated` 的权限仍被 RLS 逐行约束；序列同样显式 `grant usage`
+5. **缩略图签名 URL**：Storage 用 `createSignedUrl()` 返回 1 小时有效的下载链接；bucket 为 private，单文件 256 KB 上限
+6. **不存原图**：客户端压缩后上传缩略图，原图留在本地存储
+7. **服务端兜底校验**：`confidence ∈ [0,1]`、经纬度范围、`status` 枚举、`safety_interval_days ∈ [0,365]`、文本长度均有 check 约束——客户端校验不可信，落库前必须再校验一次
 
 ---
 
