@@ -37,7 +37,7 @@
 | [路线图](#路线图) | V1 / V2 / V3 能力边界 |
 | [已知限制](#已知限制) | 指标口径与未闭环模块 |
 | [仓库内容说明](#仓库内容说明) | 哪些内容不入库、为什么 |
-| [文档索引](#文档索引) | 事实来源与阅读顺序 |
+| [文档](#文档) | 交付材料与仓库的分工 |
 | [许可证](#许可证) | MIT |
 
 ## 概览
@@ -116,7 +116,7 @@ flowchart LR
     D --> F["随包资产<br/>yolo11n.onnx<br/>6.0 MB"]
 ```
 
-> **指标口径**：以上是同分布、受控光照下的叶片图像测试结果，**不能替代真实田间外部验证**。训练与导出脚本在 `tools/`，完整流程见 [`docs/MODEL_TRAINING_GUIDE.md`](docs/MODEL_TRAINING_GUIDE.md)，数据来源与许可见 [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md)。
+> **指标口径**：以上是同分布、受控光照下的叶片图像测试结果，**不能替代真实田间外部验证**。训练与导出脚本在 `tools/`；训练流程、数据来源与许可台账属交付材料，保留在本地 `docs/`，不随仓库发布（见「文档」与「仓库内容说明」）。
 
 训练侧权重（`best.pt` 与训练用导出 ONNX，合计约 12 MB）不进 Git 历史，见 [Release v2.0.0](https://github.com/ououlin/AgroVision/releases/tag/v2.0.0)。
 
@@ -167,12 +167,13 @@ AgroVision/
 │   ├── libs.versions.toml           # Version Catalog：全仓唯一版本源
 │   └── wrapper/                     # Gradle Wrapper 8.9
 ├── tools/                           # 训练 / 导出 / 数据准备（Python + PowerShell）
-├── docs/                            # 项目说明书、用户手册、训练指南、数据台账
 ├── competition/                     # 比赛材料：说明文档、模型卡、测试报告、提交清单
 ├── backend/supabase/                # 表结构与 RLS 说明（生产后端未上线）
 ├── .gitignore / .gitattributes      # 入库过滤规则与行尾策略
 └── LICENSE
 ```
+
+> `docs/`（项目说明书、用户手册、训练指南、数据台账）为交付材料，本地保留，不入库。
 
 包规模：`ui` 57 · `data` 48 · `domain` 12 · `di` 6 · `ml` 5 · `network` 2 · `util` 2 · `config` 1 · 根级 2（Kotlin 文件数）。
 
@@ -226,7 +227,7 @@ KEY_PASSWORD=****
 | `domain/model/PesticideCatalogTest` | 3 | 农资目录唯一性、推荐成分置顶、按防治对象检索 |
 | `domain/model/EncyclopediaImageCatalogTest` | 3 | 标签→本地图映射、历史标签归一化、不张冠李戴 |
 
-> **回归口径**：对外引用的指标与测试结论，以 [`docs/PROJECT_MANUAL.md`](docs/PROJECT_MANUAL.md) 为准；未在测试产物中留存原始记录的数字，不得用于报名材料、测试报告或答辩。
+> **回归口径**：对外引用的指标与测试结论，以本地项目说明书 `docs/PROJECT_MANUAL.md`（不随仓库发布）为准；未在测试产物中留存原始记录的数字，不得用于报名材料、测试报告或答辩。
 
 ## 功能开关
 
@@ -274,23 +275,23 @@ KEY_PASSWORD=****
 | `competition/02_data/plantvillage_color_split_manifest.csv` | 16 MB 数据集切分清单，可由 `tools/split_imagefolder_dataset.py` 重新生成 |
 | `competition/00_official/*.pdf`、`competition/01_project/*盲审版*.docx/pdf` | 比赛官方通知与提交件；对应 Markdown 源稿已在库内 |
 | `SHA256SUMS.txt` | 提交校验用临时清单，随文件集变化失效 |
+| `docs/` | 项目说明书、用户手册、训练指南、数据台账、参赛方案，仅本地保留 |
 
-因此 `docs/` 与 `competition/` 中指向上述文件的引用在本仓库内无法直接打开，属预期行为。
+因此 `competition/` 中指向上述文件的引用在本仓库内无法直接打开，属预期行为。
 
-## 文档索引
+## 文档
 
-| 文档 | 内容 |
+项目说明书、用户手册、模型训练指南、数据来源台账、上线检查清单与参赛方案属于交付与比赛材料，**保留在本地 `docs/` 目录，不随仓库发布**（已在 `.gitignore` 中忽略）。仓库只保留可复现的部分：
+
+| 内容 | 位置 |
 |:--|:--|
-| [`docs/PROJECT_MANUAL.md`](docs/PROJECT_MANUAL.md) | **项目事实总入口**：现状、架构、功能、数据、模型、部署、限制 |
-| [`docs/USER_MANUAL.md`](docs/USER_MANUAL.md) | 用户手册（唯一源，docx 由 `tools/build_user_manual_docx.py` 生成） |
-| [`docs/MODEL_TRAINING_GUIDE.md`](docs/MODEL_TRAINING_GUIDE.md) | 训练、评估与 ONNX 导出流程 |
-| [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md) | 数据来源、许可与血缘台账 |
-| [`docs/COMPETITION_PLAN_2026.md`](docs/COMPETITION_PLAN_2026.md) | 比赛定位、评分证据与排期 |
-| [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md) | 发布前检查项 |
-| [`competition/README.md`](competition/README.md) | 比赛材料目录索引 |
+| 训练 / 导出 / 数据准备脚本 | `tools/` |
+| 随包模型、标签与元数据 | `app/src/main/assets/model/` |
+| 比赛材料索引 | [`competition/README.md`](competition/README.md) |
+| 表结构与 RLS 说明 | `backend/supabase/` |
 
 ## 许可证
 
 本项目采用 [MIT 许可证](LICENSE)。Copyright (c) 2026 ououlin。
 
-任何人都可以自由使用、修改、分发本项目代码（含商业用途），只需在副本或衍生作品中保留上述版权声明与许可证全文。数据集与模型权重的来源及授权状态见 [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md)，不因本许可证而改变。
+任何人都可以自由使用、修改、分发本项目代码（含商业用途），只需在副本或衍生作品中保留上述版权声明与许可证全文。数据集与模型权重的来源及授权状态见本地 `docs/DATA_PROVENANCE.md`（不随仓库发布），不因本许可证而改变。

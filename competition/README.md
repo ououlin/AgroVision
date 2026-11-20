@@ -50,4 +50,4 @@ competition/
 4. 使用最终 APK 录制不超过 3 分钟的 MP4 应用案例视频。
 5. 按“赛道编号+作品名称+单位或队伍名.zip”命名并通过大赛官网提交。
 
-总方案见 `../docs/COMPETITION_PLAN_2026.md`，详细数据许可台账见 `../docs/DATA_PROVENANCE.md`。
+总方案见本地 `docs/COMPETITION_PLAN_2026.md`，详细数据许可台账见本地 `docs/DATA_PROVENANCE.md`（交付材料，不随仓库发布）。
