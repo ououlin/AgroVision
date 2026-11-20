@@ -1,0 +1,5 @@
+path: E:/pv_images/PlantVillage
+train: .
+val: .
+nc: 0
+names:

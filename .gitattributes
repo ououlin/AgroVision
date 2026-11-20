@@ -1,0 +1,18 @@
+# 统一行尾，避免 Windows/Linux 混合协作时整文件 diff
+* text=auto eol=lf
+
+# 批处理/脚本需要 CRLF 才能被 cmd 正确解析
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 二进制：不做任何换行转换
+*.jar binary
+*.onnx binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.pdf binary
+*.docx binary
+*.xlsx binary
+*.pptx binary

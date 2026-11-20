@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  V2.0 备份规则：允许本地数据库 + DataStore 备份，不备份原始图片（体积大且隐私）。
+  - include：Room 数据库（agrovision.db）、shared_prefs（含 SettingsDataStore 但排除 token 密文）
+  - exclude：图片缓存目录（仍在本地优先策略下保留），敏感 token 储存在 EncryptedSharedPreferences 中（排除）
+-->
+<full-backup-content>
+    <!-- Room 数据库：用户历史、地块、用药记录（V2.0 价值核心） -->
+    <include domain="database" path="agrovision.db" />
+    <include domain="database" path="agrovision.db-journal" />
+    <include domain="database" path="agrovision.db-wal" />
+    <include domain="database" path="agrovision.db-shm" />
+
+    <!-- DataStore preferences：设置项、功能开关、游客 userId 等 -->
+    <include domain="sharedpref" path="agrovision_settings.preferences_pb" />
+
+    <!-- 敏感 token 储存在 EncryptedSharedPreferences（排除） -->
+    <exclude domain="sharedpref" path="agrovision_secure_keys.xml" />
+    <exclude domain="sharedpref" path="agrovision_secure_prefs.xml" />
+
+    <!-- 原始识别图片不备份（隐私 + 体积），仅同步元数据 + 缩略图到云端 -->
+    <exclude domain="file" path="images/" />
+    <exclude domain="file" path="captures/" />
+
+    <!-- 模型文件不备份（按需重新下载） -->
+    <exclude domain="file" path="models/" />
+</full-backup-content>

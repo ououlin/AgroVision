@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">农智眼</string>
+    <string name="app_name_en">AgroVision</string>
+    <string name="tagline">智能病虫害识别助手</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_detection">AI识别</string>
+    <string name="nav_chat">AI助手</string>
+    <string name="nav_data">数据</string>
+    <string name="nav_profile">我的</string>
+    <string name="btn_start_detection">开始识别</string>
+    <string name="btn_take_photo">拍照</string>
+    <string name="btn_select_image">相册</string>
+    <string name="btn_switch_camera">切换镜头</string>
+    <string name="btn_view_result">查看详情</string>
+</resources>
