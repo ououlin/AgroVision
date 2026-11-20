@@ -60,18 +60,18 @@
 
 ```mermaid
 flowchart TD
-    UI["Compose UI<br/>21 个屏幕分包 · Material 3"]
-    VM["ViewModel<br/>StateFlow 单一状态源 · Hilt 注入"]
-    DOM["Domain<br/>诊断规则 · 配药计算 · 物候/天气 · 知识检索"]
-    REPO["Repository<br/>统一数据出入口"]
+    UI["Compose UI<br/>21 屏幕<br/>Material 3"]
+    VM["ViewModel<br/>StateFlow<br/>Hilt"]
+    DOM["Domain<br/>规则 · 配药<br/>物候 · 检索"]
+    REPO["Repository<br/>统一数据出口"]
 
     UI --> VM --> DOM --> REPO
-    REPO --> DB[("Room 2.6.1<br/>历史 / 地块 / 用药 / 反馈")]
-    REPO --> KV["DataStore + EncryptedSharedPreferences<br/>设置 / Token / API Key"]
-    REPO --> ML["ONNX Runtime 1.17.1<br/>MobileNetV3-Small · 38 类"]
-    REPO --> LLM["LLM Provider<br/>OpenAI Chat Completions 兼容"]
-    REPO --> API["Remote API 骨架<br/>FeatureFlag 关闭"]
-    LLM -.->|调用失败或未配置| DOM
+    REPO --> DB[("Room<br/>历史 · 地块<br/>用药 · 反馈")]
+    REPO --> KV["DataStore<br/>设置 · Token"]
+    REPO --> ML["ONNX Runtime<br/>MobileNetV3<br/>38 类分类"]
+    REPO --> LLM["LLM Provider<br/>OpenAI 兼容"]
+    REPO --> API["Remote API<br/>骨架 · 关闭"]
+    LLM -.->|降级| DOM
 ```
 
 **四条硬约束**
@@ -109,11 +109,11 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    A["PlantVillage color<br/>54,305 张 · 38 类"] --> B["固定划分<br/>seed 20260809 · 70/15/15"]
-    B --> C["MobileNetV3-Small<br/>224×224 · ImageNet 归一化"]
+    A["PlantVillage<br/>54,305 张<br/>38 类"] --> B["固定划分<br/>seed<br/>20260809"]
+    B --> C["MobileNetV3<br/>Small<br/>224×224"]
     C --> D["ONNX 导出<br/>输出 1×38"]
-    D --> E["测试集<br/>Top-1 99.18% · Top-3 99.95%"]
-    D --> F["assets/model/yolo11n.onnx<br/>6.0 MB · SHA-256 校验"]
+    D --> E["测试集<br/>Top-1 99.18%<br/>Top-3 99.95%"]
+    D --> F["随包资产<br/>yolo11n.onnx<br/>6.0 MB"]
 ```
 
 > **指标口径**：以上是同分布、受控光照下的叶片图像测试结果，**不能替代真实田间外部验证**。训练与导出脚本在 `tools/`，完整流程见 [`docs/MODEL_TRAINING_GUIDE.md`](docs/MODEL_TRAINING_GUIDE.md)，数据来源与许可见 [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md)。
