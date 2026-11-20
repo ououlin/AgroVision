@@ -96,3 +96,57 @@ val DarkOnSurfaceVariant = DarkTextSec
 val DarkError = Color(0xFFFFB4AB)
 val DarkErrorContainer = Color(0xFF93000A)
 val DarkOutline = DarkBorder
+
+// ============================================================
+// Material3 1.2+ Surface 容器色阶
+// ============================================================
+// Compose Material3 起，Card / NavigationBar / ModalBottomSheet / AlertDialog 的默认
+// containerColor 直接取自 surfaceContainerLow ~ surfaceContainerHighest。
+// 这批 token 若缺省，组件会退回到 M3 基线色板（带紫灰色偏），与品牌绿系产生色温冲突：
+// 浅色下发灰、深色下发紫。补齐后卡片/底栏/弹窗才有统一的绿灰中性色。
+//
+// 层级关系（由低到高，越"高"越靠近用户）：
+//   surfaceContainerLowest < Low < Container < High < Highest
+// ============================================================
+
+// ---- Light ----
+val LightSurfaceContainerLowest = Color(0xFFFFFFFF)
+val LightSurfaceContainerLow    = Color(0xFFF7FAF7)
+val LightSurfaceContainer       = Color(0xFFF1F5F1)
+val LightSurfaceContainerHigh   = Color(0xFFEBF0EB)
+val LightSurfaceContainerHighest = Color(0xFFE4EAE4)
+val LightSurfaceBright = Color(0xFFFBFDFB)
+val LightSurfaceDim    = Color(0xFFDCE2DC)
+
+// ---- Dark ----
+val DarkSurfaceContainerLowest = Color(0xFF0A0E13)
+val DarkSurfaceContainerLow    = Color(0xFF12171F)
+val DarkSurfaceContainer       = DarkBgCard        // 与既有卡片色对齐
+val DarkSurfaceContainerHigh   = DarkSurfaceVariant
+val DarkSurfaceContainerHighest = Color(0xFF232A33)
+val DarkSurfaceBright = Color(0xFF2A323C)
+val DarkSurfaceDim    = Color(0xFF0C1015)
+
+// ---- 其余补齐的语义角色（inverse / outlineVariant / scrim / 容器内文本） ----
+val LightOutlineVariant     = Color(0xFFE0E4E0)
+val DarkOutlineVariant      = Color(0xFF262C34)
+val LightInverseSurface     = Color(0xFF2B322B)
+val LightInverseOnSurface   = Color(0xFFF1F5F1)
+val LightInversePrimary     = Color(0xFFA5D6A7)
+val DarkInverseSurface      = Color(0xFFE6EDF3)
+val DarkInverseOnSurface    = Color(0xFF1C2129)
+val DarkInversePrimary      = BrandMain
+val LightScrim              = Color(0xFF000000)
+val DarkScrim               = Color(0xFF000000)
+
+val LightOnSecondaryContainer = Color(0xFF0D47A1)
+val DarkSecondaryContainer    = Color(0xFF1E3A5F)
+val DarkOnSecondaryContainer  = Color(0xFFD6E7FF)
+
+val LightTertiaryContainer    = Color(0xFFFFE0B2)
+val LightOnTertiaryContainer  = Color(0xFF4A2600)
+val DarkTertiaryContainer     = Color(0xFF5C3A00)
+val DarkOnTertiaryContainer   = Color(0xFFFFDDB3)
+
+val LightOnErrorContainer = Color(0xFF410002)
+val DarkOnErrorContainer  = Color(0xFFFFDAD6)
