@@ -1,9 +1,0 @@
-asset_id,status,data_type,dataset_name,source_or_local_evidence,records_or_files,classes_or_fields,license,current_use,blocking_issue
-DATA-001,current_incomplete,open_research,PlantVillage 8-class subset,E:\pv_images\PlantVillage,7722,8 directories,CC BY-SA 3.0 to be archived,current pilot model,"original download receipt and historical train/val split missing"
-DATA-002,current_archived,open_research,PlantVillage color 38-class dataset,D:\xiazai\archive.zip; D:\xiazai\plantvillage_color_archive; split D:\xiazai\plantvillage_color_split,54305,38 directories,PlantVillage reuse terms to be archived,competition model training,"color variant extracted only; split manifest saved at competition/02_data/plantvillage_color_split_manifest.csv; archive SHA-256 08BF3315BACB7D36F4E37AE47BDAD7562761C261FA2CB0B4BA76CC606C3B912F"
-DATA-003,current_incomplete,knowledge,Local encyclopedia,app/src/main/assets/encyclopedia.json,56298 bytes,knowledge entries,per-entry sources missing,RAG and diagnosis,"source and reviewer fields missing"
-DATA-004,current,user_generated,Farmer field records,Room plots/history/treatments/feedback,dynamic,see Room entities,user consent,personalization and traceability,"need retention deletion and export rules"
-DATA-005,current_third_party,api,QWeather API,WeatherRepository,dynamic,current weather,QWeather terms,optional weather,"not government open data"
-DATA-006,current_third_party,api,wttr.in,WeatherRepository,dynamic,current weather,terms pending,fallback weather,"not government open data and SLA unclear"
-DATA-007,to_select,government_open,Guangxi or national public dataset,TBD,TBD,TBD,TBD,competition data fusion,"must be selected integrated and archived before submission"
-DATA-008,to_select,official_public,Pesticide registration public information,TBD,TBD,TBD,reuse terms pending,safety validation,"access and reuse conditions must be confirmed"

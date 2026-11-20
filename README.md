@@ -167,8 +167,7 @@ AgroVision/
 │   ├── libs.versions.toml           # Version Catalog：全仓唯一版本源
 │   └── wrapper/                     # Gradle Wrapper 8.9
 ├── tools/                           # 训练 / 导出 / 数据准备（Python + PowerShell）
-├── competition/                     # 比赛材料：说明文档、模型卡、测试报告、提交清单
-├── backend/supabase/                # 表结构与 RLS 说明（生产后端未上线）
+├── backend/supabase/                # 表结构、RLS 策略与 RPC（生产后端未上线）
 ├── .gitignore / .gitattributes      # 入库过滤规则与行尾策略
 └── LICENSE
 ```
@@ -272,23 +271,19 @@ KEY_PASSWORD=****
 | `local.properties` | 本机 Android SDK 路径，按 `sdk.dir=D:\...\Sdk` 自行创建 |
 | `app-*.apk` | 安装包（Debug / Release），由构建生成 |
 | `tools/agrovision_cls/` | 训练权重与导出模型，见 [Release v2.0.0](https://github.com/ououlin/AgroVision/releases/tag/v2.0.0) |
-| `competition/02_data/plantvillage_color_split_manifest.csv` | 16 MB 数据集切分清单，可由 `tools/split_imagefolder_dataset.py` 重新生成 |
-| `competition/00_official/*.pdf`、`competition/01_project/*盲审版*.docx/pdf` | 比赛官方通知与提交件；对应 Markdown 源稿已在库内 |
-| `SHA256SUMS.txt` | 提交校验用临时清单，随文件集变化失效 |
 | `docs/` | 项目说明书、用户手册、训练指南、数据台账、参赛方案，仅本地保留 |
-
-因此 `competition/` 中指向上述文件的引用在本仓库内无法直接打开，属预期行为。
+| `competition/` | 比赛材料（说明文档、模型卡、测试报告草稿、提交清单、官方通知），仅本地保留 |
+| `SHA256SUMS.txt` | 提交校验用临时清单，随文件集变化失效 |
 
 ## 文档
 
-项目说明书、用户手册、模型训练指南、数据来源台账、上线检查清单与参赛方案属于交付与比赛材料，**保留在本地 `docs/` 目录，不随仓库发布**（已在 `.gitignore` 中忽略）。仓库只保留可复现的部分：
+项目说明书、用户手册、模型训练指南、数据来源台账、上线检查清单、参赛方案与比赛材料属于交付材料，**保留在本地 `docs/`、`competition/` 目录，不随仓库发布**（已在 `.gitignore` 中忽略）。仓库只保留可复现的部分：
 
 | 内容 | 位置 |
 |:--|:--|
 | 训练 / 导出 / 数据准备脚本 | `tools/` |
 | 随包模型、标签与元数据 | `app/src/main/assets/model/` |
-| 比赛材料索引 | [`competition/README.md`](competition/README.md) |
-| 表结构与 RLS 说明 | `backend/supabase/` |
+| 表结构、RLS 策略与 RPC | `backend/supabase/` |
 
 ## 许可证
 
