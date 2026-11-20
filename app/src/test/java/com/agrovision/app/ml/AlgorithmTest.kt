@@ -158,10 +158,10 @@ class AlgorithmTest {
         // 中心框：cx=320, cy=320, w=100, h=100 (在 640x640 坐标系中)
         val (left, top, right, bottom) = convertBox(320f, 320f, 100f, 100f, 1280f, 720f)
         // 缩放比例: scaleX=2, scaleY=1.125
-        assertEquals(540f, left, 0.1f)   // (320 - 50) * 2
-        assertEquals(270f, top, 0.1f)    // (320 - 50) * 1.125
-        assertEquals(740f, right, 0.1f)  // (320 + 50) * 2
-        assertEquals(427.5f, bottom, 0.1f) // (320 + 50) * 1.125
+        assertEquals(540f, left, 0.1f)      // (320 - 50) * 2
+        assertEquals(303.75f, top, 0.1f)    // (320 - 50) * 1.125
+        assertEquals(740f, right, 0.1f)     // (320 + 50) * 2
+        assertEquals(416.25f, bottom, 0.1f) // (320 + 50) * 1.125
     }
 
     @Test
