@@ -21,7 +21,7 @@ import com.agrovision.app.data.local.entity.TreatmentEntity
         TreatmentEntity::class
     ],
     version = 5,
-    exportSchema = false
+    exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
 

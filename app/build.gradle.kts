@@ -138,6 +138,15 @@ android {
     }
 }
 
+// ============================================================
+// Room schema 快照
+// 每次改表结构后，KSP 会把 app/schemas/ 下的 JSON 更新一份，
+// 与版本号一起入库，迁移 diff 与迁移测试都以此为准。
+// ============================================================
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
 dependencies {
     // ============ Core ============
     implementation(libs.androidx.core.ktx)
