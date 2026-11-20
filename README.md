@@ -196,6 +196,19 @@ AgroVision/
 ./gradlew :app:assembleRelease   # Release（需签名，见下）
 ```
 
+### 依赖仓库
+
+默认直连 `google()` / `mavenCentral()` / `gradlePluginPortal()`，公共 CI 与陌生环境都能直接复现。国内网络可显式开启阿里云镜像：
+
+```bash
+./gradlew :app:assembleDebug -PcnMirror=true
+# 或 export AGROVISION_CN_MIRROR=true
+```
+
+> 镜像默认关闭是有意为之：`maven.aliyun.com/repository/public` 只代理 Maven Central，Google 系制品要走 `/repository/google`，混用时会产生大量 404 日志；且境外 runner 访问该镜像会直接拖垮插件解析。
+>
+> 切换仓库源会让 Gradle 的按仓库分区缓存失效，首次构建需要联网重新解析一次。
+
 首次构建需自行创建 `local.properties`：
 
 ```properties
