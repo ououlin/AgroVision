@@ -12,7 +12,10 @@ import torch.nn as nn
 from torchvision import models
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATASET_DIR = r"D:\agrovision_dataset"
+DATASET_DIR = os.environ.get(
+    "AGROVISION_DATASET",
+    str(Path.home() / "agrovision_dataset"),
+)
 IMGSZ = 224
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
 IMAGENET_STD = [0.229, 0.224, 0.225]

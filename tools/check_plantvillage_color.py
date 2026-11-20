@@ -1,3 +1,4 @@
+import os
 from __future__ import annotations
 
 from collections import Counter
@@ -5,8 +6,14 @@ from pathlib import Path
 import zipfile
 
 
-ZIP_PATH = Path(r"E:\nong\_dataset_work\archive.zip")
-OUTPUT_ROOT = Path(r"E:\nong\AgroVision\competition\02_data\datasets\plantvillage_color_archive")
+ZIP_PATH = Path(os.environ.get(
+    "AGROVISION_ARCHIVE",
+    str(Path.home() / "plantvillage" / "archive.zip"),
+))
+OUTPUT_ROOT = Path(os.environ.get(
+    "AGROVISION_COLOR_OUT",
+    str(Path.home() / "plantvillage" / "color_archive"),
+))
 
 
 def main() -> None:

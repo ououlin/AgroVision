@@ -22,7 +22,10 @@ from torchvision import datasets, transforms, models
 # ============================================================
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATASET_DIR = r"D:\agrovision_dataset"
+DATASET_DIR = os.environ.get(
+    "AGROVISION_DATASET",
+    str(Path.home() / "agrovision_dataset"),
+)
 
 # 模型参数
 IMGSZ = 224

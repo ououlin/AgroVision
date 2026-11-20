@@ -1,5 +1,6 @@
+from pathlib import Path
 import os, sys, traceback
-os.chdir(r"C:\Users\24875\Desktop\农智眼\AgroVision\app\src\main\assets\model")
+os.chdir(str(Path(__file__).resolve().parent.parent / "app" / "src" / "main" / "assets" / "model"))
 
 log = open("convert_log.txt", "w", encoding="utf-8")
 def log_print(*args):

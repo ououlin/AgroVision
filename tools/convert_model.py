@@ -1,5 +1,6 @@
+from pathlib import Path
 import os, sys
-os.chdir(r"C:\Users\24875\Desktop\农智眼\AgroVision\app\src\main\assets\model")
+os.chdir(str(Path(__file__).resolve().parent.parent / "app" / "src" / "main" / "assets" / "model"))
 print("Step 1: Export ONNX from PT...")
 sys.stdout.flush()
 
