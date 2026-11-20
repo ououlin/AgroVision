@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  应用内语言列表（Android 13+ 的 per-app language 能力）。
+  系统设置 → 应用 → 农智眼 → 语言 会读取这里的条目；
+  MainActivity.applyLanguage() 在 API 33+ 通过 LocaleManager 写入的是同一份配置。
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="zh" />
+    <locale android:name="en" />
+</locale-config>

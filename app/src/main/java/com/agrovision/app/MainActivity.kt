@@ -1,8 +1,11 @@
 package com.agrovision.app
 
+import android.app.LocaleManager
 import android.content.Context
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
+import android.os.LocaleList
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -76,12 +79,35 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /**
+     * 切换应用语言。
+     *
+     * Android 13（API 33）起走系统 per-app language：LocaleManager 由框架持久化，
+     * 系统自动重建 Activity，且能与「设置 → 应用 → 语言」双向同步。
+     *
+     * Android 12L 及以下没有该 API，只能退化为进程内 Locale 切换 + 主动重建。
+     * 原实现只调 `resources.updateConfiguration`（API 25 起废弃），
+     * 既不持久化，也会被系统语言变更覆盖，重启即失效。
+     */
     private fun applyLanguage(lang: String) {
-        val locale = Locale(if (lang == "en") "en" else "zh")
-        Locale.setDefault(locale)
-        val config = Configuration(resources.configuration)
-        config.setLocale(locale)
+        val tag = if (lang == "en") "en" else "zh"
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val manager = getSystemService(LocaleManager::class.java) ?: return
+            val target = LocaleList.forLanguageTags(tag)
+            if (manager.applicationLocales != target) {
+                manager.applicationLocales = target
+            }
+            return
+        }
+
         @Suppress("DEPRECATION")
-        resources.updateConfiguration(config, resources.displayMetrics)
+        run {
+            val locale = Locale(tag)
+            Locale.setDefault(locale)
+            val config = Configuration(resources.configuration).apply { setLocale(locale) }
+            resources.updateConfiguration(config, resources.displayMetrics)
+            recreate()
+        }
     }
 }
