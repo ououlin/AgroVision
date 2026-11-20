@@ -155,4 +155,6 @@ KEY_PASSWORD=****
 
 ## License
 
-私有项目，保留所有权利。
+本项目采用 [MIT 许可证](LICENSE)。Copyright (c) 2026 ououlin。
+
+任何人都可以自由使用、修改、分发本项目代码（含商业用途），只需在副本或衍生作品中保留上述版权声明与许可证全文。数据集与模型权重的来源及授权状态见 `docs/DATA_PROVENANCE.md`，不因本许可证而改变。
